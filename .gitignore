@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+
+# Husky
+.husky/
+
+# Misc
+.DS_Store
