@@ -5,9 +5,6 @@ node_modules/
 cypress/videos/
 cypress/screenshots/
 
-# Husky
-.husky/
-
 # Misc
 .DS_Store
 
