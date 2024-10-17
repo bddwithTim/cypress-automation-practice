@@ -1,10 +1,13 @@
 # Cypress Automation Practice
 
-This repository contains an automated testing project using Cypress for a test automation practice website.
+[![Cypress Tests](https://img.shields.io/badge/Cypress-Tests-green?style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/your-project-id)
+[![Cypress CI](https://github.com/yourusername/your-repo-name/actions/workflows/cypress.yml/badge.svg)](https://github.com/yourusername/your-repo-name/actions/workflows/cypress.yml)
+
+This repository contains an automated **end-to-end (e2e) testing** project using Cypress for the test automation practice website: https://testautomationpractice.blogspot.com/. 
 
 ## Project Overview
 
-This project demonstrates various automated testing scenarios for a web application, including form filling, search functionality, dynamic button interactions, alerts and popups handling, drag and drop operations, and more.
+This project demonstrates various automated e2e testing scenarios for the specified web application, including form filling, search functionality, dynamic button interactions, alerts and popups handling, drag and drop operations, and more. All tests are designed to run against the live website, simulating real user interactions in a browser environment.
 
 ## Tools and Frameworks
 
@@ -14,6 +17,7 @@ This project demonstrates various automated testing scenarios for a web applicat
 - **Prettier**: Code formatter
 - **Husky**: Git hooks to improve the commit process
 - **lint-staged**: Run linters on git staged files
+- **Mochawesome**: Test reporter for generating HTML/JSON test reports
 
 ## Additional Cypress Plugins
 
@@ -26,6 +30,7 @@ This project demonstrates various automated testing scenarios for a web applicat
 - `cypress/support/pages`: Page Object Models
 - `cypress/support/commands.js`: Custom Cypress commands
 - `cypress.config.js`: Cypress configuration file
+- `cypress/results`: Contains generated test reports
 
 ## Key Features
 
@@ -36,6 +41,7 @@ This project demonstrates various automated testing scenarios for a web applicat
 5. Drag and drop operations
 6. Slider manipulation
 7. Resizable element manipulation
+8. Automated test reporting with Mochawesome
 
 ## Scripts
 
@@ -53,6 +59,15 @@ This project demonstrates various automated testing scenarios for a web applicat
 1. Clone this repository
 2. Install dependencies: `npm install`
 3. Run tests using one of the scripts mentioned above
+
+## Test Reporting
+
+This project uses Mochawesome for generating test reports. After running the tests, you can find the HTML report in the `cypress/results` directory. To view the report:
+
+1. Navigate to the `cypress/results` directory
+2. Open the `report.html` file in a web browser
+
+The report provides a detailed overview of test results, including passed and failed tests, test duration, and any error messages.
 
 ## Linting and Formatting
 
@@ -72,5 +87,3 @@ This project uses Husky for Git hooks:
 ## Contributing
 
 Please ensure that all tests pass and the code adheres to the existing style before submitting a pull request.
-
-

@@ -10,3 +10,6 @@ cypress/screenshots/
 
 # Misc
 .DS_Store
+
+# Test Reports
+cypress/results/
