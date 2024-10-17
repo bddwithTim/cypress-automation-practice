@@ -4,6 +4,9 @@ import cypressPlugin from "eslint-plugin-cypress";
 export default [
     js.configs.recommended,
     {
+        ignores: ["**/cypress/results/**"],
+    },
+    {
         files: ["**/*.js"],
         languageOptions: {
             ecmaVersion: 2022,
