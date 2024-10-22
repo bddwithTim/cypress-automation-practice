@@ -1,7 +1,7 @@
 # Cypress Automation Practice
 
 [![Cypress Tests](https://img.shields.io/badge/Cypress-Tests-green?style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/your-project-id)
-[![Cypress CI](https://github.com/yourusername/your-repo-name/actions/workflows/cypress.yml/badge.svg)](https://github.com/bddwithTim/cypress-automation-practice/actions/workflows/cypress.yml)
+[![Cypress CI](https://github.com/bddwithTim/cypress-automation-practice/actions/workflows/cypress.yml/badge.svg)](https://github.com/bddwithTim/cypress-automation-practice/actions/workflows/cypress.yml)
 
 This repository contains an automated **end-to-end (e2e) testing** project using Cypress for the test automation practice website: https://testautomationpractice.blogspot.com/. 
 
