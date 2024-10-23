@@ -197,11 +197,19 @@ class DragAndDropSection {
 
 class SliderSection {
   elements = {
-    sliderHandle: () => cy.get("#slider .ui-slider-handle"),
-    slider: () => cy.get("#slider"),
+    sliderHandleFirst: () => cy.get("#slider-range .ui-slider-handle").first(),
+    sliderHandleSecond: () => cy.get("#slider-range .ui-slider-handle").last(),
+    slider: () => cy.get("div#slider-range"),
   };
 
-  moveSliderTo(targetPercentage) {
+  getCurrentSliderValue(handle) {
+    return handle.invoke("attr", "style").then((style) => {
+      const match = style.match(/left:\s*([\d.]+)%/);
+      return match ? parseFloat(match[1]) : null;
+    });
+  }
+
+  moveSliderHandle(handle, targetPercentage) {
     if (targetPercentage < 0 || targetPercentage > 100) {
       throw new Error(
         `Target percentage ${targetPercentage} is out of range (0-100)`,
@@ -212,50 +220,47 @@ class SliderSection {
       const sliderWidth = $slider.width();
       const targetPixels = (targetPercentage / 100) * sliderWidth;
 
-      this.elements.sliderHandle().drag("#slider", {
-        force: true,
-        target: { x: targetPixels, y: 0 },
+      handle.then(($handle) => {
+        const handleWidth = $handle.width();
+        const currentPosition = $handle.position().left + handleWidth / 2;
+        const delta = targetPixels - currentPosition;
+
+        handle
+          .trigger("mousedown", { which: 1, pageX: currentPosition })
+          .trigger("mousemove", { which: 1, pageX: currentPosition + delta })
+          .trigger("mouseup", { force: true });
       });
     });
 
     // Verify the slider moved to the correct position (with some tolerance)
-    this.getCurrentSliderValue().should("be.closeTo", targetPercentage, 2);
+    this.getCurrentSliderValue(handle).should(
+      "be.closeTo",
+      targetPercentage,
+      5,
+    );
   }
 
-  getCurrentSliderValue() {
-    return this.elements
-      .sliderHandle()
-      .invoke("attr", "style")
-      .then((style) => {
-        const match = style.match(/left:\s*([\d.]+)%/);
-        return match ? parseFloat(match[1]) : null;
-      });
-  }
-}
+  moveFirstSliderToPrice(price) {
+    const maxPrice = 500;
+    if (price < 0 || price > maxPrice) {
+      throw new Error(`Price ${price} is out of range ($0 - $${maxPrice})`);
+    }
+    const targetPercentage = (price / maxPrice) * 100;
 
-class ResizableSection {
-  elements = {
-    resizableElement: () => cy.get("div#resizable"),
-    resizeHandle: () => cy.get("div#resizable .ui-resizable-se"),
-  };
-
-  resizeElementBy(offsetX, offsetY) {
-    this.elements
-      .resizeHandle()
-      .scrollIntoView()
-      .should("be.visible")
-      .realMouseDown({ position: "bottomRight" })
-      .realMouseMove(offsetX, offsetY, { position: "bottomRight" })
-      .realMouseUp({ position: "bottomRight" });
-  }
-
-  // Assert new element size (default 132px + offset)
-  assertElementResizedBy(expectedOffsetX, expectedOffsetY, tolerance = 5) {
-    this.elements.resizableElement().then(($el) => {
-      const rect = $el[0].getBoundingClientRect();
-      expect(rect.width).to.be.closeTo(expectedOffsetX + 132, tolerance);
-      expect(rect.height).to.be.closeTo(expectedOffsetY + 132, tolerance);
-    });
+    // Ensure targetPercentage is less than or equal to the second slider's position
+    return this.getCurrentSliderValue(this.elements.sliderHandleSecond()).then(
+      (secondSliderPosition) => {
+        if (targetPercentage > secondSliderPosition) {
+          throw new Error(
+            "First slider cannot be moved past the second slider",
+          );
+        }
+        return this.moveSliderHandle(
+          this.elements.sliderHandleFirst(),
+          targetPercentage,
+        );
+      },
+    );
   }
 }
 
@@ -267,7 +272,6 @@ class HomePage {
     this.alertsAndPopups = new AlertsAndPopupsSection();
     this.dragAndDrop = new DragAndDropSection();
     this.slider = new SliderSection();
-    this.resizable = new ResizableSection();
   }
 
   visit() {

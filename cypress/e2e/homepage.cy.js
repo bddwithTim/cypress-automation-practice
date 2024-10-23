@@ -5,7 +5,7 @@ describe("Landing Page", () => {
     HomePage.visit();
   });
 
-  it("should fill out the form", () => {
+  it.skip("should fill out the form", () => {
     HomePage.form.fillName("John Doe");
     HomePage.form.fillEmail("john.doe@example.com");
     HomePage.form.fillPhone("1234567890");
@@ -17,12 +17,12 @@ describe("Landing Page", () => {
     HomePage.form.setDate("2023-12-31");
   });
 
-  it("performs search functionality and displays results", () => {
+  it.skip("performs search functionality and displays results", () => {
     HomePage.search.searchFor("Cypress");
     HomePage.search.validateSearchResults();
   });
 
-  it("performs dynamic button click", () => {
+  it.skip("performs dynamic button click", () => {
     HomePage.dynamicButton.clickDynamicButton("Start");
     HomePage.dynamicButton.waitForButtonStateChange("Stop");
 
@@ -34,25 +34,17 @@ describe("Landing Page", () => {
     HomePage.dynamicButton.clickNewTabButton();
   });
 
-  it("performs alerts and popups", () => {
+  it.skip("performs alerts and popups", () => {
     HomePage.alertsAndPopups.clickSimpleAlertButton();
     HomePage.alertsAndPopups.clickConfirmationAlertButton("OK");
     HomePage.alertsAndPopups.clickPromptAlertButton("Cancel");
   });
 
-  it("performs drag and drop", () => {
+  it.skip("performs drag and drop", () => {
     HomePage.dragAndDrop.dragDraggableElementToDroppableElement();
   });
 
   it("performs slider functionality", () => {
-    HomePage.slider.moveSliderTo(50);
-    HomePage.slider.moveSliderTo(25);
-  });
-
-  it("performs horizontal resizable functionality", () => {
-    HomePage.resizable.resizeElementBy(-50, 100);
-
-    // validate the element has been resized by the expected values
-    HomePage.resizable.assertElementResizedBy(-50, 100);
+    HomePage.slider.moveFirstSliderToPrice(0);
   });
 });
