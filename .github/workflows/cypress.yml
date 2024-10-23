@@ -28,7 +28,7 @@ jobs:
         run: npm run test:headless
 
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure() # Upload results only if there's a failure
         with:
           name: cypress-results
