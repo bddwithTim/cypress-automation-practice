@@ -1,6 +1,6 @@
 # Cypress Automation Practice
 
-[![Cypress Tests](https://img.shields.io/badge/Cypress-Tests-green?style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/your-project-id)
+
 [![Cypress CI](https://github.com/bddwithTim/cypress-automation-practice/actions/workflows/cypress.yml/badge.svg)](https://github.com/bddwithTim/cypress-automation-practice/actions/workflows/cypress.yml)
 
 This repository contains an automated **end-to-end (e2e) testing** project using Cypress for the test automation practice website: https://testautomationpractice.blogspot.com/. 
@@ -40,8 +40,6 @@ This project demonstrates various automated e2e testing scenarios for the specif
 4. Alerts and popups handling
 5. Drag and drop operations
 6. Slider manipulation
-7. Resizable element manipulation
-8. Automated test reporting with Mochawesome
 
 ## Scripts
 
