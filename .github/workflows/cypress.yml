@@ -2,9 +2,9 @@ name: Cypress Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ main ]
+    branches: [ master, main ]
   workflow_dispatch: # For manual triggering
   schedule:
     - cron: '0 19 * * *' # Runs every day at 3 AM GMT+8 (19:00 UTC)
@@ -25,10 +25,7 @@ jobs:
         run: npm ci
 
       - name: Run Cypress tests
-        uses: cypress-io/github-action@v5
-        with:
-          browser: chrome
-          headed: false # Replaced headless with the correct option
+        run: npm run test:headless
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
